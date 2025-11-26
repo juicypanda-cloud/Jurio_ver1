@@ -1,0 +1,9 @@
+requests
+beautifulsoup4
+python-dotenv
+tqdm
+pandas
+pdfminer.six
+pypdf
+Pillow
+playwright
