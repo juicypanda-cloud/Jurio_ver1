@@ -1,0 +1,35 @@
+name: Jurio - auto update pipeline
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    # everyday at 00:00 UTC (modify if you want different time)
+    - cron: "0 0 * * *"
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          npm ci --prefer-offline || npm install
+
+      - name: Run full Jurio pipeline
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          # add other env secrets if your scripts need them:
+          # OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          node scripts/run_full_pipeline.js
