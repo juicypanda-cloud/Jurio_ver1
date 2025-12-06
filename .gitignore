@@ -17,3 +17,31 @@ out/
 .DS_Store
 .vscode/
 .idea/
+# Python caches
+__pycache__/
+*.pyc
+
+# Node/npm
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json.bak
+package.json.bak
+
+# virtual env, build artifacts, processed data
+venv/
+processed/
+jurio_batch_work/
+
+# env / secrets
+.env
+.env.local
+.env.*_local
+
+# macOS, editors
+.DS_Store
+*.swp
+*.swo
+*.bak
+*.log
